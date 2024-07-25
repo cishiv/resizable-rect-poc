@@ -35,12 +35,10 @@ func main() {
 	for !rl.WindowShouldClose() {
 		mousePos := rl.GetMousePosition()
 
-		// Handle shape dragging and resizing
 		for i := range shapes {
 			handleShapeInteraction(&shapes[i], mousePos, resizeHandle)
 		}
 
-		// Handle dragging shapes from sidebar
 		if rl.IsMouseButtonPressed(rl.MouseLeftButton) {
 			for _, sidebarShape := range sidebarShapes {
 				if rl.CheckCollisionPointRec(mousePos, sidebarShape.rect) {
@@ -57,15 +55,12 @@ func main() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.RayWhite)
 
-		// Draw sidebar
 		rl.DrawRectangle(0, 0, sidebarWidth, screenHeight, rl.LightGray)
 
-		// Draw sidebar shapes
 		for _, shape := range sidebarShapes {
 			rl.DrawRectangleRec(shape.rect, shape.color)
 		}
 
-		// Draw shapes on main screen
 		for _, shape := range shapes {
 			rl.DrawRectangleRec(shape.rect, shape.color)
 			drawResizeHandle(shape, resizeHandle)
